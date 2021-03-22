@@ -4,7 +4,6 @@
 - [About the Project](#about-the-project)
 - [Project Files](#project-files)
 - [Specifications](#specifications)
-- [Setting up](#setting-up)
 
 ----
 
@@ -19,6 +18,6 @@
 ----
 ## Specifications
 - [Requirements Specification](https://drive.google.com/drive/folders/176PyHwzWjwQdGCKEdQrak2mF5u-Bbf-k?usp=sharing)
-- [Figma Prototype]()
-- [Design Document]()
+- [Figma Prototype](#todo)
+- [Design Document](#todo)
 ----
