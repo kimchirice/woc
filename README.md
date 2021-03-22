@@ -1,4 +1,4 @@
-# Prisoners Aid (ACT)
+# Women of Colour Australia
 
 ## Table of Contents
 - [About the Project](#about-the-project)
