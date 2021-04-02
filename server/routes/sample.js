@@ -5,6 +5,6 @@ const ctrl = require("../controller/sample.controller");
     sample api route
 */
 
-router.get("/aa", ctrl.sample);
+router.get("/", ctrl.sample);
 
 module.exports = router;

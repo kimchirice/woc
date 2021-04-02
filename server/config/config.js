@@ -11,12 +11,12 @@ console.log(process.env.SERVER_PORT);
 
 // exports
 const SERVER = {
-  hostname: SERVER_HOSTNAME,
-  port: SERVER_PORT,
+    hostname: SERVER_HOSTNAME,
+    port: SERVER_PORT,
 };
 
 const config = {
-  server: SERVER,
+    server: SERVER,
 };
 
 module.exports = config;

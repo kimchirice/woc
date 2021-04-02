@@ -2,7 +2,7 @@
     custom logging messages for debugging
 */
 const getTimeStamp = () => {
-  return new Date().toISOString();
+    return new Date().toISOString();
 };
 
 /**
@@ -10,16 +10,13 @@ const getTimeStamp = () => {
  * Object is optional
  */
 const log = (type) => {
-  return (namespace, msg, object) => {
-    if (object) {
-      console.log(
-        `[${getTimeStamp()}] [${type}] [${namespace}] ${msg}`,
-        object
-      );
-    } else {
-      console.log(`[${getTimeStamp()}] [${type}] [${namespace}] ${msg}`);
-    }
-  };
+    return (namespace, msg, object) => {
+        if (object) {
+            console.log(`[${getTimeStamp()}] [${type}] [${namespace}] ${msg}`, object);
+        } else {
+            console.log(`[${getTimeStamp()}] [${type}] [${namespace}] ${msg}`);
+        }
+    };
 };
 
 const info = log("INFO");
