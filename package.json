@@ -41,6 +41,8 @@
     "proxy": "http://localhost:1337"
   },
   "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.23.1",
     "prettier": "^2.2.1"
   }
 }
