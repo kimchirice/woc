@@ -5,7 +5,7 @@ require("dotenv").config(); //.env file in main folder
     config for things
 */
 
-const SERVER_PORT = process.env.SERVER_PORT || 1337;
+const SERVER_PORT = process.env.SERVER_PORT || 8080;
 const SERVER_HOSTNAME = process.SERVER_HOSTNAME || "localhost";
 console.log(process.env.SERVER_PORT);
 
