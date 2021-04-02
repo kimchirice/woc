@@ -26,7 +26,7 @@ yay new project
 - [Requirements Specification](https://drive.google.com/drive/folders/176PyHwzWjwQdGCKEdQrak2mF5u-Bbf-k?usp=sharing)
 - [Figma Prototype](#todo)
 - [Design Document](#todo)
-- [Dev Docs](./dev_docs.md)
+- [Dev Docs](./docs/dev_docs.md)
 
 
 ----
