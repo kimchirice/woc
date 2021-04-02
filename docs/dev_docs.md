@@ -4,6 +4,29 @@ no idea lets do something here
 
 ## run scripts
 
+### prerequisites
+
+- recommend to work on vscode to format every save
+- install prettier ext for vscode
+- add this to your `settings.json`
+```json
+// NOTE: this will affect every file youll work on anywhere
+// if you want to limit this to only this workspace
+// look up on adding this to `.vscode` instead
+{
+    // other settings
+    "editor.formatOnSave": true,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "
+}
+```
+- install prettier globally
+```sh
+sudo npm i -g prettier
+```
+
 ### for development 
 
 install/reinstall node packages
