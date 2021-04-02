@@ -1,17 +1,20 @@
 const http = require("http");
 const express = require("express");
 const logging = require("./config/logging");
+const path = require("path");
 
 /* 
     Server stuff
 */
+require("dotenv").config();
 
+// config
 const NAMESPACE = "SERVER";
-const router = express();
-const PORT = 8080;
+const app = express();
+const PORT = 1337;
 
 // logging request
-router.use((req, res, next) => {
+app.use((req, res, next) => {
   logging.info(
     NAMESPACE,
     `Method - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`
@@ -27,15 +30,22 @@ router.use((req, res, next) => {
   next();
 });
 
+// middleware
+app.use(express.json());
+
+// serving build folder
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static("public"));
+
 // ================================================================================
 // api imports
 const sampleRoute = require("./routes/sample");
 
-router.use("/api/sample", sampleRoute);
+app.use("/api/sample", sampleRoute);
 // ================================================================================
 
 // error handling
-router.use((req, res) => {
+app.use((req, res) => {
   const error = new Error("Path not found");
   res.status(400).json({
     message: error.message,
@@ -47,7 +57,7 @@ router.use((req, res) => {
 // mongodb connection
 
 // creating server
-const httpServer = http.createServer(router);
+const httpServer = http.createServer(app);
 httpServer.listen(8080, () => {
   logging.info(NAMESPACE, `Server running on port ${PORT}`);
 });
