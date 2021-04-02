@@ -2,6 +2,7 @@ const http = require("http");
 const express = require("express");
 const logging = require("./config/logging");
 const path = require("path");
+const config = require("./config/config");
 
 /* 
     Server stuff
@@ -11,7 +12,6 @@ require("dotenv").config();
 // config
 const NAMESPACE = "SERVER";
 const app = express();
-const PORT = 1337;
 
 // logging request
 app.use((req, res, next) => {
@@ -52,12 +52,18 @@ app.use((req, res) => {
   });
 });
 
-// redirect
+// redirect to index
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+});
 
 // mongodb connection
 
 // creating server
 const httpServer = http.createServer(app);
-httpServer.listen(8080, () => {
-  logging.info(NAMESPACE, `Server running on port ${PORT}`);
+httpServer.listen(config.server.port, () => {
+  logging.info(
+    NAMESPACE,
+    `Server running on ${config.server.hostname}:${config.server.port}`
+  );
 });
