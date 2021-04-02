@@ -16,8 +16,8 @@
   "scripts": {
     "dev-client": "react-scripts start",
     "dev-server": "nodemon server/server.js",
-    "host": "echo lame",
-    "build": "react-scripts build",
+    "build": "rm -rf build && react-scripts build",
+    "host": "node server/server.js",
     "test": "react-scripts test",
     "__eject": "react-scripts eject"
   },
@@ -37,6 +37,10 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
+    ],
+    "proxy": "http://localhost:1337"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }
