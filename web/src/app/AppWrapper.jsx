@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import App from "./App";
 
 const AppWrapper = () => {
@@ -13,11 +14,12 @@ const AppWrapper = () => {
             })
             .catch((error) => {
                 console.log("Something went wrong: ", error);
+                setMessage("Server not on");
             })
-            .finally(() => setLoading(false));
+            .then(() => setLoading(false));
     }, []);
 
-    return loading ? <></> : <App msg={message} />;
+    return loading ? <>Nothing here</> : <App msg={message} />;
 };
 
 export default AppWrapper;

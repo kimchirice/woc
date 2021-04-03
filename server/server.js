@@ -31,12 +31,14 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // serving build folder
-app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static(path.resolve(__dirname, "../web", "build")));
+
 app.use(express.static("public"));
 
 // ================================================================================
 // api imports
 const sampleRoute = require("./routes/sample");
+const { copyFile } = require("fs");
 
 app.use("/api/sample", sampleRoute);
 // ================================================================================
@@ -49,7 +51,7 @@ app.use((req, res) => {
 
 // redirect to index
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../web", "build", "index.html"));
 });
 
 // mongodb connection
@@ -59,3 +61,7 @@ const httpServer = http.createServer(app);
 httpServer.listen(config.server.port, () => {
     logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`);
 });
+
+// app.listen(config.server.port, () => {
+//     logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`);
+// });
