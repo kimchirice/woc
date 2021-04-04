@@ -13,13 +13,13 @@ In general, try to:
 
 `src` folder structure
 ```
-src
-|_ /app             app components/wrapper components, set overall style, handle routing
-|_ /assets          non-code assets (images)
-|_ /components      common components
-|_ /context         react context
-|_ /utils           utility helper functions
-|_ /pages           main wrapper/style components for each pages
+src/
+|_ app/             app components/wrapper components, set overall style, handle routing
+|_ assets/          non-code assets (images)
+|_ components/      common components
+|_ context/         react context
+|_ utils/          utility helper functions
+|_ pages/           main wrapper/style components for each pages
 |_ index.html       entry point, apply global context, global themes
 |_ // any other global styling stuff
 ```
@@ -40,6 +40,18 @@ src
 ## server 
 
 simple express api server
+
+folder structure
+```
+|_ configs/         store configs, util functions, middleware
+|  |_ logging.js    custom logging functions
+|  |_ config.js     server configs
+|_ models/          data model
+|_ routes/          setup api routes with controllers
+|_ controllers/     controllers definitions
+|_ .env             environment variables
+|_ server.js        main server entry point, configs, api routing
+``` 
 
 ### dependencies
 
