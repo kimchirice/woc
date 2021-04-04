@@ -2,6 +2,8 @@
 
 no idea lets do something here
 
+- [bare skeleton notes](./skeleton.md)
+
 ## run scripts
 
 ### prerequisites
