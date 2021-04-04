@@ -4,7 +4,7 @@
   "description": "## Table of Contents - [Women of Colour Australia](#women-of-colour-australia)   - [Table of Contents](#table-of-contents)   - [About the Project](#about-the-project)   - [Project Files](#project-files)   - [Specifications](#specifications)",
   "scripts": {
     "serve": "cd server && npm run serve",
-    "install": "sh install_deps.sh",
+    "install-deps": "sh install_deps.sh",
     "build": "cd web && npm run build && wait",
     "dev-web": "cd web && npm run start",
     "dev-server": "cd server && npm run start",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/codesydney/woc/issues"
   },
-  "homepage": "https://github.com/codesydney/woc#readme"
+  "homepage": "https://github.com/codesydney/woc#readme",
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
 }

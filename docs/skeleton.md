@@ -10,6 +10,7 @@ In general, try to:
   - wrapper components `NameWrapper.jsx` handling containing logic (api calls) then pass data into
   - styled components `Name.jsx` handling the look of it on the front end.
 > not strict, keep them combined if its clearer for you that way
+- set `proxy` to the same port the server is served on (in `package.json`)
 
 `src` folder structure
 ```

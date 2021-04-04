@@ -3,23 +3,25 @@ import axios from "axios";
 import App from "./App";
 
 const AppWrapper = () => {
-    const [loading, setLoading] = useState(true);
+    const [status, setStatus] = useState(false);
     const [message, setMessage] = useState("");
 
+    // api call on load
     useEffect(() => {
         axios
             .get("/api/sample/")
             .then((res) => {
                 setMessage(res.data.message);
+                setStatus(true);
             })
             .catch((error) => {
                 console.log("Something went wrong: ", error);
-                setMessage("Server not on");
+                setStatus(false);
             })
-            .then(() => setLoading(false));
     }, []);
 
-    return loading ? <>Nothing here</> : <App msg={message} />;
+    // passing data to jsx
+    return <App msg={message} status={status}/>
 };
 
 export default AppWrapper;
