@@ -1,38 +1,25 @@
 {
   "name": "woc",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.8.3",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.1"
-  },
+  "version": "1.0.0",
+  "description": "## Table of Contents - [Women of Colour Australia](#women-of-colour-australia)   - [Table of Contents](#table-of-contents)   - [About the Project](#about-the-project)   - [Project Files](#project-files)   - [Specifications](#specifications)",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "serve": "cd server && npm run serve",
+    "install-deps": "sh install_deps.sh",
+    "build": "cd web && npm run build && wait",
+    "dev-web": "cd web && npm run start",
+    "dev-server": "cd server && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codesydney/woc.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codesydney/woc/issues"
+  },
+  "homepage": "https://github.com/codesydney/woc#readme",
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }
