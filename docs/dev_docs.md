@@ -6,7 +6,7 @@ no idea lets do something here
 
 ## run scripts
 
-### prerequisites
+### vscode recommended settings
 
 - recommend to work on vscode to format every save
 - install prettier ext for vscode
@@ -21,6 +21,9 @@ no idea lets do something here
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
     "
 }
 ```
