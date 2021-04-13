@@ -6,12 +6,20 @@ import "./App.css";
 
 // route pages components imports
 import Main from "../pages/main/Main";
-import Page1 from "../pages/page1/Page1";
+import Login from "../pages/login/Login";
+import Register from "../pages/register/Register";
+
+/* 
+    TODO: 
+    [ ] set up auth containers
+    [ ] set up roles containers
+    [ ] set up auth context
+*/
 
 const App = (props) => {
-    const { msg, status } = props
+    const { msg, status } = props;
 
-    const serverStatus = ()  => status ? "on" : "off";
+    const serverStatus = () => (status ? "on" : "off");
 
     return (
         <BrowserRouter>
@@ -19,9 +27,10 @@ const App = (props) => {
 
             <p>server status: {serverStatus()}</p>
 
-            {/* routes */}
-            <Route exact path="/" component={() => <Main msg={msg} color="green"/>}/>
-            <Route path="/page1" component={Page1}/>
+            {/* routing */}
+            <Route exact path="/" component={() => <Main msg={msg} color="green" />} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
         </BrowserRouter>
     );
 };
