@@ -5,20 +5,19 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
     return (
         <ul>
-            <NavLink dir="/">Main page</NavLink>
-            <NavLink dir="/page1">Page 1</NavLink>
+            <NavLink dir="/">LandingPage</NavLink>
+            <NavLink dir="/user">DashBoard</NavLink>
+            <NavLink dir="/login">Login</NavLink>
+            <NavLink dir="/register">register</NavLink>
         </ul>
     );
 };
 
-// Navigation links for components
-const NavLink = (props) => {
-    const { dir, children } = props;
-    return (
-        <li>
-            <Link to={dir}>{children}</Link>
-        </li>
-    );
-};
+// Navigation links for NavBar
+const NavLink = ({ dir, children }) => (
+    <li>
+        <Link to={dir}>{children}</Link>
+    </li>
+);
 
 export default NavBar;
