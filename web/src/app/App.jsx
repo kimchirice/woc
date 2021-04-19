@@ -21,7 +21,7 @@ const App = ({ status, msg }) => {
                 <Route exact path="/" component={() => <Pages.Landing status={status} msg={msg} color="green" />} />
                 <Route path="/user" component={Pages.UserDashBoard} />
                 <Route path="/login" component={Pages.Login} />
-                <Route path="/register" component={Pages.Register} />
+                <Route path="/signUp" component={Pages.SignUp} />
             </Layout>
         </BrowserRouter>
     );
