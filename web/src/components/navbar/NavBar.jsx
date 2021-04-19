@@ -8,7 +8,7 @@ const NavBar = () => {
             <NavLink dir="/">LandingPage</NavLink>
             <NavLink dir="/user">DashBoard</NavLink>
             <NavLink dir="/login">Login</NavLink>
-            <NavLink dir="/register">register</NavLink>
+            <NavLink dir="/signUp">Sign Up</NavLink>
         </ul>
     );
 };
