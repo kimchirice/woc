@@ -46,6 +46,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// 1. once click the 'sign up' btn, the user data will be added to users database(no need to validatte the details currently)
+// 2. redirect the UI to page of /user/:id/
+// 3. 
+// const handleSignUp = => {
+//  
+// }
+
 export default function SignUp() {
   const classes = useStyles();
 
