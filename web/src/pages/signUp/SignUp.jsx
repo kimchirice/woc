@@ -46,13 +46,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// 1. once click the 'sign up' btn, the user data will be added to users database(no need to validatte the details currently)
-// 2. redirect the UI to page of /user/:id/
-// 3. 
-// const handleSignUp = => {
-//  
-// }
-
 export default function SignUp() {
   const classes = useStyles();
 
@@ -121,15 +114,17 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
+          
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+          
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
