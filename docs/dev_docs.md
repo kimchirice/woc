@@ -24,7 +24,6 @@ no idea lets do something here
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
-    "
 }
 ```
 - install prettier globally
