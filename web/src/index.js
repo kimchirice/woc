@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
+
 import "./index.css";
 import AppWrapper from "./app/AppWrapper";
-import reportWebVitals from "./reportWebVitals";
+import FortAwesomeIcons from "./components/FortAwesome/FortAwesomeIcons";
 
 ReactDOM.render(
     <React.StrictMode>
-        <AppWrapper />
+        <FortAwesomeIcons>
+            <AppWrapper />
+        </FortAwesomeIcons>
     </React.StrictMode>,
     document.getElementById("root")
 );
