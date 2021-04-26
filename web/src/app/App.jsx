@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 
@@ -26,7 +25,5 @@ const App = () => {
         </BrowserRouter>
     );
 };
-
-App.propTypes = {};
 
 export default App;

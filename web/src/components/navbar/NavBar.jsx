@@ -12,13 +12,13 @@ import "./NavBar.css";
 */
 
 const NavItems = [
-    { title: "Log in", url: "/login", cName: "nav-links" },
-    { title: "Sign up", url: "/signup", cName: "nav-links" },
+    { title: "Log in", url: "/login" },
+    { title: "Sign up", url: "/signup" },
 ];
 
 const NavItem = ({ item, index }) => (
     <li key={index}>
-        <Link className={item.cName} to={item.url}>
+        <Link className="nav-links" to={item.url}>
             {item.title}
         </Link>
     </li>

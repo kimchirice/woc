@@ -1,63 +1,62 @@
- .App {
-  text-align: center;
-  box-sizing: border-box;
-  font-family: Montserrat Classic;
-  padding: 0;
-  margin: 0;
+.App {
+    text-align: center;
+    box-sizing: border-box;
+    font-family: Montserrat Classic;
+    padding: 0;
+    margin: 0;
 }
 
 .MuiGrid-spacing-xs-3 {
-  width: calc(100% + 0px) !important;
-  margin: 0px !important;
+    width: calc(100% + 0px) !important;
+    margin: 0px !important;
 }
 
-.caption{
-  font-family: Montserrat Classic;
-  height: auto;
-  font-weight: 700;
-  color:#1D1D1D;
-  font-size: 80px;
-  line-height: 1;
-  padding: 10px 10px 10px 10px;
-  text-align: center;
-  margin: 20px 27px 10px 27px;
-  padding-right: 35px;
-  padding-left: 35px;
+.caption {
+    font-family: Montserrat Classic;
+    height: auto;
+    font-weight: 700;
+    color: #1d1d1d;
+    font-size: 80px;
+    line-height: 1;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    margin: 20px 27px 10px 27px;
+    padding-right: 35px;
+    padding-left: 35px;
 }
 
-.description{
-  letter-spacing: 0.01em;
-  margin: 0px 63px 0px 63px;
-  font-weight: 500;
-  font-size: 28px;
-  padding-left: 3px;
-  padding-right: 3px;
+.description {
+    letter-spacing: 0.01em;
+    margin: 0px 63px 0px 63px;
+    font-weight: 500;
+    font-size: 28px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
-.btn-join{
-  font-size: 30px;
-  background-color:#1D1D1D;
-  color: white;
-  margin-top: 20px;
-  border-radius: 30px;
-  width: 300px;
-  height: 60px;
-  text-align: center;
+.btn-join {
+    font-size: 1em !important;
+    background-color: #895714 !important;
+    color: white !important;
+    margin-top: 2rem !important;
+    border-radius: 4rem !important;
+    width: 35%;
+    height: 4rem;
+    text-align: center;
+    text-decoration: bold;
 }
-
 
 .btn-join:hover {
-  color:white;
+    color: white;
 }
 
 .btn-join:active {
-  box-shadow: 0 5px white;
-  transform: translateY(4px);
-  color: white;
+    box-shadow: 0 5px white;
+    transform: translateY(4px);
+    color: white;
 }
 
-.picture{
-  height: auto;
-  width: 100%;
+.picture {
+    height: auto;
+    width: 100%;
 }
-
