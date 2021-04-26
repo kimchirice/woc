@@ -1,4 +1,4 @@
-export default [
+const cardData = [
     {
         icons: ["fas", "chalkboard-teacher"],
         title: "Mentoring",
@@ -12,7 +12,7 @@ export default [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.",
     },
     {
-        icons: ["fas", "bookreader"],
+        icons: ["fas", "book-reader"],
         title: "Book club",
         desc:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.",
@@ -24,3 +24,5 @@ export default [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.",
     },
 ];
+
+export default cardData;
