@@ -13,12 +13,12 @@ import * as Pages from "../pages/Pages";
     [ ] set up auth context
 */
 
-const App = ({ status, msg }) => {
+const App = () => {
     return (
         <BrowserRouter>
             <Layout>
                 {/* routing */}
-                <Route exact path="/" component={() => <Pages.Landing status={status} msg={msg} color="green" />} />
+                <Route exact path="/" component={() => <Pages.Landing />} />
                 <Route path="/user" component={Pages.UserDashBoard} />
                 <Route path="/login" component={Pages.Login} />
                 <Route path="/signUp" component={Pages.SignUp} />
@@ -27,9 +27,6 @@ const App = ({ status, msg }) => {
     );
 };
 
-App.propTypes = {
-    msg: PropTypes.string.isRequired,
-    status: PropTypes.bool.isRequired,
-};
+App.propTypes = {};
 
 export default App;

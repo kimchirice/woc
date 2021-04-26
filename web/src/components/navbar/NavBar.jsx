@@ -1,23 +1,44 @@
 import React from "react";
+import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "../../res/img/2.png";
+import "./NavBar.css";
 
-// Navigation component containing links to other pages
-const NavBar = () => {
-    return (
-        <ul>
-            <NavLink dir="/">LandingPage</NavLink>
-            <NavLink dir="/user">DashBoard</NavLink>
-            <NavLink dir="/login">Login</NavLink>
-            <NavLink dir="/signUp">Sign Up</NavLink>
-        </ul>
-    );
-};
+/* 
+    Handing main navigation bar for site
 
-// Navigation links for NavBar
-const NavLink = ({ dir, children }) => (
-    <li>
-        <Link to={dir}>{children}</Link>
+    - NavItems might be change due to authentication status
+*/
+
+const NavItems = [
+    { title: "Log in", url: "/login", cName: "nav-links" },
+    { title: "Sign up", url: "/signup", cName: "nav-links" },
+];
+
+const NavItem = ({ item, index }) => (
+    <li key={index}>
+        <Link className={item.cName} to={item.url}>
+            {item.title}
+        </Link>
     </li>
 );
+
+class NavBar extends React.Component {
+    renderNavItems = () => NavItems.map((item, index) => <NavItem index={index} item={item} />);
+
+    render() {
+        return (
+            <Nav className="NavItems">
+                <Link to="/">
+                    <img className="logo-image" src={logo} alt="Women of Colour"></img>
+                </Link>
+                <div>
+                    <ul className="navbar-title">{this.renderNavItems()}</ul>
+                </div>
+            </Nav>
+        );
+    }
+}
 
 export default NavBar;

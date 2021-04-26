@@ -1,38 +1,63 @@
-.App {
+ .App {
+  text-align: center;
+  box-sizing: border-box;
+  font-family: Montserrat Classic;
+  padding: 0;
+  margin: 0;
+}
+
+.MuiGrid-spacing-xs-3 {
+  width: calc(100% + 0px) !important;
+  margin: 0px !important;
+}
+
+.caption{
+  font-family: Montserrat Classic;
+  height: auto;
+  font-weight: 700;
+  color:#1D1D1D;
+  font-size: 80px;
+  line-height: 1;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  margin: 20px 27px 10px 27px;
+  padding-right: 35px;
+  padding-left: 35px;
+}
+
+.description{
+  letter-spacing: 0.01em;
+  margin: 0px 63px 0px 63px;
+  font-weight: 500;
+  font-size: 28px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.btn-join{
+  font-size: 30px;
+  background-color:#1D1D1D;
+  color: white;
+  margin-top: 20px;
+  border-radius: 30px;
+  width: 300px;
+  height: 60px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.btn-join:hover {
+  color:white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.btn-join:active {
+  box-shadow: 0 5px white;
+  transform: translateY(4px);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.picture{
+  height: auto;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
