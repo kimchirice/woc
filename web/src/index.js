@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
-import AppWrapper from "./app/AppWrapper";
 import FortAwesomeIcons from "./components/FortAwesome/FortAwesomeIcons";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppWrapper from "./app/AppWrapper";
 
 ReactDOM.render(
     <React.StrictMode>
+        <CssBaseline />
         <FortAwesomeIcons>
             <AppWrapper />
         </FortAwesomeIcons>
