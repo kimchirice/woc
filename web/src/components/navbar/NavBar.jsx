@@ -1,7 +1,6 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../res/img/2.png";
 import "./NavBar.css";
 
@@ -11,32 +10,29 @@ import "./NavBar.css";
     - NavItems might be change due to authentication status
 */
 
-const NavItems = [
-    { title: "Log in", url: "/login" },
-    { title: "Sign up", url: "/signup" },
-];
-
-const NavItem = ({ item, index }) => (
-    <li key={index}>
-        <Link className="nav-links" to={item.url}>
-            {item.title}
-        </Link>
-    </li>
-);
-
 class NavBar extends React.Component {
-    renderNavItems = () => NavItems.map((item, index) => <NavItem index={index} item={item} />);
+    // renderNavItems = () => NavItems.map((item, index) => <NavItem index={index} item={item} />);
 
     render() {
         return (
-            <Nav className="NavItems">
-                <Link to="/">
-                    <img className="logo-image" src={logo} alt="Women of Colour"></img>
-                </Link>
-                <div>
-                    <ul className="navbar-title">{this.renderNavItems()}</ul>
-                </div>
-            </Nav>
+            <>
+                <AppBar style={{ flexGrow: 1 }}>
+                    <Toolbar>
+                        <Link to="/">
+                            <div style={{ flexGrow: 1 }}>
+                                <img className="logo-image" src={logo}></img>
+                            </div>
+                        </Link>
+                        <Typography variant="h6" style={{ flexGrow: 1 }}></Typography>
+                        <Link to="/login">
+                            <Button>Login</Button>
+                        </Link>
+                        <Link to="/signup">
+                            <Button>Sign up</Button>
+                        </Link>
+                    </Toolbar>
+                </AppBar>
+            </>
         );
     }
 }
