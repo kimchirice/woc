@@ -27,7 +27,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(2),
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(2, 0, 2),
     },
 }));
 
@@ -51,15 +51,13 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const classes = useStyles();
-
     const handleSignUp = (event) => {
         event.preventDefault();
         console.log("signup btn is clicked");
-        console.log(`now we have a new user, and userName is 
-      ${firstName} ${lastName}
-      email address is ${email}`);
+        console.log(`now we have a new user, and userName is ${firstName} ${lastName} email address is ${email}`);
     };
+
+    const classes = useStyles();
 
     return (
         <Container component="main" maxWidth="xs">

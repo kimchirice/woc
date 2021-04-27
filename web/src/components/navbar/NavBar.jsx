@@ -16,6 +16,12 @@ const styles = makeStyles((theme) => ({
     flex: {
         flexGrow: 1,
     },
+    navItem: {
+        color: "white",
+        fontSize: "1.5em",
+    },
+    offset: theme.mixins.toolbar,
+    offsetPad: { paddingBottom: theme.spacing(1) },
 }));
 
 const NavBar = () => {
@@ -23,22 +29,24 @@ const NavBar = () => {
 
     return (
         <>
-            <AppBar style={{ flexGrow: 1 }}>
+            <AppBar className={classes.flex}>
                 <Toolbar>
                     <Link to="/">
                         <div className={classes.flex}>
-                            <img className="logo-image" src={logo}></img>
+                            <img className="logo-image" src={logo} alt="landing page art"></img>
                         </div>
                     </Link>
                     <Typography variant="h6" className={classes.flex}></Typography>
                     <Link to="/login">
-                        <Button>Login</Button>
+                        <Button className={classes.navItem}>Login</Button>
                     </Link>
                     <Link to="/signup">
-                        <Button>Sign up</Button>
+                        <Button className={classes.navItem}>Sign up</Button>
                     </Link>
                 </Toolbar>
             </AppBar>
+            <div className={`${classes.offset}`} />
+            <div className={`${classes.offsetPad}`} />
         </>
     );
 };

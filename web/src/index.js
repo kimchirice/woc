@@ -6,13 +6,17 @@ import "./index.css";
 import FortAwesomeIcons from "./components/FortAwesome/FortAwesomeIcons";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppWrapper from "./app/AppWrapper";
+import { ThemeProvider } from "@material-ui/core";
+import Theme from "./Theme";
 
 ReactDOM.render(
     <React.StrictMode>
-        <CssBaseline />
-        <FortAwesomeIcons>
-            <AppWrapper />
-        </FortAwesomeIcons>
+        <ThemeProvider theme={Theme}>
+            <CssBaseline />
+            <FortAwesomeIcons>
+                <AppWrapper />
+            </FortAwesomeIcons>
+        </ThemeProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

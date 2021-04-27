@@ -7,13 +7,13 @@ const styles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         textAlign: "center",
         color: theme.palette.text.secondary,
     },
     btnJoin: {
         fontSize: "1em",
-        backgroundColor: "#895714",
+        backgroundColor: theme.palette.secondary.main,
         color: "white",
         marginTop: "2rem",
         borderRadius: "4rem",
@@ -21,7 +21,7 @@ const styles = makeStyles((theme) => ({
         height: "4rem",
         textAlign: "center",
         "&:hover": {
-            backgroundColor: "#1d1d1d",
+            backgroundColor: theme.palette.primary.main,
         },
         "&:active": {
             transform: "translateY(10px)",

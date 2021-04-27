@@ -32,23 +32,22 @@ function Landing() {
 
     return (
         <>
-            <Grid container spacing={3}>
-                <Grid item xs={6} md={6} align="center" className={classes.root}>
-                    <h1 className={classes.caption}>Fairer and more equitable Australia for all Women of Colour</h1>
-                    <h5 className={classes.description}>We exist to champion Australia’s Women of Colour.</h5>
-                    <Link to="/signup">
-                        <Button variant="contained" className={classes.btnJoin}>
-                            Join us
-                        </Button>
-                    </Link>
+            <Container>
+                <Grid container spacing={3}>
+                    <Grid item xs={6} md={6} align="center" className={classes.root}>
+                        <h1 className={classes.caption}>Fairer and more equitable Australia for all Women of Colour</h1>
+                        <h5 className={classes.description}>We exist to champion Australia’s Women of Colour.</h5>
+                        <Link to="/signup">
+                            <Button variant="contained" /* color="secondary" */ className={classes.btnJoin}>
+                                Join us
+                            </Button>
+                        </Link>
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                        <img className={classes.landingPic} src={landingSvg} alt="women of colour" />
+                    </Grid>
                 </Grid>
-                <Grid item xs={6} md={6}>
-                    <img className={classes.landingPic} src={landingSvg} alt="women of colour" />
-                </Grid>
-            </Grid>
-
-            <Container style={{ marginTop: "2em" }}>
-                <Grid container spacing={5}>
+                <Grid container spacing={4} style={{ paddingTop: "4em" }}>
                     {cardData.map((item, index) => (
                         <Card item={item} index={index} />
                     ))}
