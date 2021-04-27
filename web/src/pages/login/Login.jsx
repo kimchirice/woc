@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import './login.css'
+
 
 const Log = () => {
     const [email, setEmail] = useState('')
@@ -14,21 +16,23 @@ const Log = () => {
     };
 
     return ( 
-        <div className="login">
+        <div className="login-wrapper">
+            <h1>Please Log In</h1>
             <form className="login-form" onSubmit={handleSubmit}>
                 <input 
-                    type="email" 
-                    name="email" 
+                    type="email"
+                    placeholder="pablo@gmial.com" 
+                    className="email" 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}>
                 </input>
                 <input 
                     type="password" 
-                    name="password"
+                    className="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}>
                 </input>
-                <button block type="submit" disabled={!validateForm()}></button>
+                <button block type="submit" className="submit-button" disabled={!validateForm()}></button>
             </form>
         </div>
      );
