@@ -1,9 +1,19 @@
 {
-    "users": [
-        {
-            "username": "pablogayoso",
-            "password": "Abc123",
-            "id": 1
-        }
-    ]
+  "users": [
+    {
+      "email": "pablogayoso@hotmail.com",
+      "password": "Abc123",
+      "id": 1
+    },
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$vj77dZxFanlePo2m8vx3UuPUXaqZvaPh7v1OWHsvuNb49jmeQL6gS",
+      "id": 2
+    },
+    {
+      "email": "gayoso99@gmail.com",
+      "password": "$2a$10$6THKntuoay758KQMqZFsyuhl361OPvxtyOmj2P6jN.MxNa8UjaZ4u",
+      "id": 3
+    }
+  ]
 }
