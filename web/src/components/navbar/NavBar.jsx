@@ -1,23 +1,54 @@
 import React from "react";
+import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
+import logo from "../../res/img/2.png";
+import "./NavBar.css";
 
-// Navigation component containing links to other pages
+/* 
+    Handing main navigation bar for site
+
+    - NavItems might be change due to authentication status
+    - Move regular css to MUI css
+*/
+
+const styles = makeStyles((theme) => ({
+    flex: {
+        flexGrow: 1,
+    },
+    navItem: {
+        color: "white",
+        fontSize: "1.5em",
+    },
+    offset: theme.mixins.toolbar,
+    offsetPad: { paddingBottom: theme.spacing(1) },
+}));
+
 const NavBar = () => {
+    const classes = styles();
+
     return (
-        <ul>
-            <NavLink dir="/">LandingPage</NavLink>
-            <NavLink dir="/user">DashBoard</NavLink>
-            <NavLink dir="/login">Login</NavLink>
-            <NavLink dir="/signUp">Sign Up</NavLink>
-        </ul>
+        <>
+            <AppBar className={classes.flex}>
+                <Toolbar>
+                    <Link to="/">
+                        <div className={classes.flex}>
+                            <img className="logo-image" src={logo} alt="landing page art"></img>
+                        </div>
+                    </Link>
+                    <Typography variant="h6" className={classes.flex}></Typography>
+                    <Link to="/login">
+                        <Button className={classes.navItem}>Login</Button>
+                    </Link>
+                    <Link to="/signup">
+                        <Button className={classes.navItem}>Sign up</Button>
+                    </Link>
+                </Toolbar>
+            </AppBar>
+            <div className={`${classes.offset}`} />
+            <div className={`${classes.offsetPad}`} />
+        </>
     );
 };
-
-// Navigation links for NavBar
-const NavLink = ({ dir, children }) => (
-    <li>
-        <Link to={dir}>{children}</Link>
-    </li>
-);
 
 export default NavBar;

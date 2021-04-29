@@ -1,0 +1,38 @@
+.NavItems {
+    display: flex;
+    justify-content: space-between;
+    background: #1d1d1d;
+    height: 80px;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.navbar-title {
+    display: flex;
+    justify-content: space-between;
+    /* grid-template-columns: repeat(5, auto); */
+    grid-gap: 10px;
+    text-align: center;
+    margin-right: 2rem;
+    color: #1d1d1d;
+}
+
+a {
+    margin-right: 10px;
+}
+
+.nav-links {
+    color: white;
+    padding: 0.5 rem 1 rem;
+}
+
+.logo-image {
+    justify-content: left;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 20px;
+}
