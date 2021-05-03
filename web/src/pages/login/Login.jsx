@@ -59,10 +59,10 @@ async function loginUser(credentials) {
    },
    body: JSON.stringify(credentials)
   })
-   .then(data => console.log(data))
+   .then(response => response.json())
 }
 
-export default function SignIn( ) {
+export default function SignIn() {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -70,11 +70,15 @@ export default function SignIn( ) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    try {
     const token = await loginUser({
       email,
       password
     });
     setToken(token);
+  } catch (e) {
+    alert(e.message)
+  }
   };
 
   function validateForm() {
