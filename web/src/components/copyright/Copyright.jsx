@@ -8,6 +8,8 @@ const Copyright = () => {
           {"Copyright © "}
           <Link 
             color="inherit" 
+            target='_blank' 
+            rel='noopener'
             href="https://womenofcolour.org.au/">
               Women of Colour
           </Link>{" "}
