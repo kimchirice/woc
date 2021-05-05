@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link as RouterLink } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -124,7 +125,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signUp" variant="body2">
+              <Link component={RouterLink} to="/signUp" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
