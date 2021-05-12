@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Push to Heroku
 
 # Controls when the action will run. 
 on:
@@ -9,6 +9,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  # NOTE: May need to seperate this
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -33,8 +34,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Building static files
         run: npm run build
-
-      - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
