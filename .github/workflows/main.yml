@@ -1,11 +1,14 @@
 
+name: CICD
 
-name: Push to Heroku
-
-on: push
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  test: # runs on every push
+  test: # should run every push/ pr
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -16,10 +19,13 @@ jobs:
       - name: Building static files
         run: npm run build
   
-  production:
+  production: # should run every successful merge on main? & not on PR
     runs-on: ubuntu-latest
-    if: success() && github.ref == 'refs/heads/master'
+    needs: test
+    if: success() && github.event.push.base.ref == 'refs/heads/main' && github.event.push.pull_request.ref != 'refs/heads/main'
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
