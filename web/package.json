@@ -23,7 +23,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "rm -rf build && react-undraw-cli && react-scripts build",
+        "build": "rm -rf build && react-scripts build",
         "test": "react-scripts test",
         "__eject": "react-scripts eject"
     },
