@@ -1,6 +1,5 @@
-import React, { useState, useReducer} from "react";
-import { UPDATE_FORM, onFocusOut, onInputChange, validateInput } from '../../utils/formUtils'
-import PropTypes from 'prop-types'
+import React, { useState } from "react";
+import { checkIsFormValid, validateInput } from "../../utils/formUtils";
 import { Link as RouterLink } from 'react-router-dom'
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -38,26 +37,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const formsReducer = (state, action) => {
-  switch(action.type) {
-    case UPDATE_FORM: 
-      const { name, value, touched, hasError, error, isFormValid } = action.data
-      return {
-        ...state,
-        [name]: {
-          ...state[name], 
-          value,
-          touched,
-          hasError,
-          error
-        },
-        isFormValid
-      }
-    default:
-      return state
-  }
-}
-
 const initialState = {
     firstName: {
         value: '',
@@ -84,19 +63,76 @@ const initialState = {
       error: '',
     },
     newsletter: {
-      value: false, touched: false, hasError: false, error:""
+      value: true, touched: false, hasErrors: false, error: '',
     },
     isFormValid: false,
 }
 
 function SignUp() {
-  const [formState, dispatch] = useReducer(formsReducer, initialState)
+  const [formState, setFormState] = useState(initialState)
   const [showError, setShowError] = useState(false)
 
   const classes = useStyles();
+
+  const handleChange = (event) => {
+      const { name, value } = event.target
+      const { hasError, error } = validateInput(name, value)
+      const isFormValid = checkIsFormValid(name, value, hasError, error, formState)
+      setFormState(prevState => ({
+              ...prevState,
+              [name]: {
+                ...prevState[name],
+                value,
+                hasError,
+                error,
+                touched: false,
+              },
+              isFormValid
+      }))
+  }
+
+    const handleCheckBox = (event) => {
+        const { name, checked } = event.target
+        const { hasError, error } = validateInput(name, checked)
+        const isFormValid = checkIsFormValid(name, checked, hasError, error, formState)
+        setFormState(prevState => ({
+            ...prevState,
+            [name]: {
+                ...prevState[name],
+                value: checked,
+                hasError,
+                error,
+                touched: true,
+            },
+            isFormValid
+        }))
+    }
+
+  const handleOnBlur = (event) => {
+      const { name, value } = event.target
+      const { hasError, error } = validateInput( name, value )
+      const isFormValid =  checkIsFormValid(name, value, hasError, error, formState)
+      setFormState(prevState => ({
+              ...prevState,
+              [name]: {
+                  ...prevState[name],
+                  value,
+                  hasError,
+                  error,
+                  touched: true,
+              },
+              isFormValid
+          }
+      ))
+  }
+
+
   const handleSignUp = (event) => {
     event.preventDefault()
-    
+    console.log(`submit btn is clicked ...`)
+      let tempFormState = {}
+      console.table(tempFormState)
+
     let isFormValid = true
 
     for ( const name in formState) {
@@ -106,33 +142,41 @@ function SignUp() {
       if (hasError) {
         isFormValid = false
       }
-      if (name) {
-        dispatch({
-          type: UPDATE_FORM,
-          data: {
-            name,
-            value,
-            hasError,
-            error,
-            touch: true,
-            isFormValid
-          },
-        })
-      }
+
+        if (name) {
+            tempFormState[name] = {
+                value,
+                hasError,
+                error,
+                touched: true
+            }
+        }
     }
 
-    if (!isFormValid) {
-      setShowError(true)
-    } else {
-      window.alert('sending login data to the server')
-      console.table(formState)
+      setFormState({
+          ...tempFormState,
+          isFormValid
+      })
+
+      if (!isFormValid ) {
+          setShowError(true)
+
+      } else {
+        // TODOS 
+        // 1. POST new user to the server
+        // 2. includes check duplicate user 
+        // 3. redirect to dashboard once sucessfully created new user
+          window.alert('sending login data to the server')
+      }
+
+      console.log(`showError being ${showError}`)
+
+      setTimeout(() => {setShowError(false)}, 5000)
+
     }
-    
-    setTimeout(() => {setShowError(false)}, 5000)
-    
-  }
-    return (
-        <Container component="main" maxWidth="xs">
+
+   return (
+      <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -153,10 +197,8 @@ function SignUp() {
                           id="firstName"
                           label="First Name"
                           value={formState.firstName.value}
-                          onChange={e => onInputChange(e.target.name, e.target.value, dispatch, formState)}
-                          onBlur={e => {
-onFocusOut(e.target.name, e.target.value, dispatch, formState)
-          }}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
                           error={formState.firstName.touched && formState.firstName.hasError}
                           helperText={formState.firstName.error}
                         />
@@ -170,10 +212,8 @@ onFocusOut(e.target.name, e.target.value, dispatch, formState)
                           id="lastName"
                           label="Last Name"
                           value={formState.lastName.value}
-                          onChange={e => onInputChange(e.target.name, e.target.value, dispatch, formState)}
-                          onBlur={e => {
-              onFocusOut(e.target.name, e.target.value, dispatch, formState)
-            }}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
                           error={formState.lastName.touched && formState.lastName.hasError}
                           helperText={formState.lastName.error}
                         />
@@ -188,8 +228,8 @@ onFocusOut(e.target.name, e.target.value, dispatch, formState)
                           label="Email Address"
                           type='email'
                           value={formState.email.value}
-                          onChange={e => onInputChange(e.target.name, e.target.value, dispatch, formState)}
-                          onBlur={e => {onFocusOut(e.target.name, e.target.value, dispatch, formState)}}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
                           error={formState.email.touched && formState.email.hasError }
                           helperText={formState.email.error}
                         />
@@ -205,8 +245,8 @@ onFocusOut(e.target.name, e.target.value, dispatch, formState)
                           type="password"
                           autoComplete="current-password"
                           value={formState.password.value}
-                          onChange={e => onInputChange(e.target.name, e.target.value, dispatch, formState)}
-                          onBlur={e => {onFocusOut(e.target.name, e.target.value, dispatch, formState)}}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
                           error={formState.password.touched && formState.password.hasError }
                           helperText={formState.password.error}
                         />
@@ -216,14 +256,14 @@ onFocusOut(e.target.name, e.target.value, dispatch, formState)
                                 control={
                                   <Checkbox
                                     name="newsletter"
-                                    checked={formState.newsletter.value} 
-                                    value="allowExtraEmails" 
+                                    checked={formState.newsletter.value}
+                                    value="allowExtraEmails"
                                     color="primary"
-                                    onChange={e => onInputChange(e.target.name, e.target.checked, dispatch, formState) }
+                                    onChange={handleCheckBox}
                                 />
                                 }
                                 label="I want to receive inspiration, marketing promotions and updates via email."
-                            />                            
+                            />
                         </Grid>
                     </Grid>
 
@@ -251,11 +291,8 @@ onFocusOut(e.target.name, e.target.value, dispatch, formState)
                 <Copyright />
             </Box>
         </Container>
-    );
+    )
 }
 
+export default SignUp
 
-
-
-
-export default SignUp;
