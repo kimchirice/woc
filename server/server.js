@@ -1,67 +1,47 @@
-const http = require("http");
-const express = require("express");
-const logging = require("./config/logging");
-const path = require("path");
-const config = require("./config/config");
+const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
 
-/* 
-    Server stuff
-*/
-require("dotenv").config();
+const logging = require('./config/logging');
+const config = require('./config/config');
+const serverUtils = require('./utils/server.util');
 
-// config
-const NAMESPACE = "SERVER";
+require('dotenv').config();
+
+/**
+ * TODO:
+ * - set up cors to secure access
+ */
+
+// server config ------------------------------------------------------------------------------------------
+const NAMESPACE = 'SERVER';
 const app = express();
-
-// logging each request
-app.use((req, res, next) => {
-    logging.info(NAMESPACE, `Method - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
-
-    res.on("finish", () => {
-        logging.info(
-            NAMESPACE,
-            `Method - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${req.statusCode}]`
-        );
-    });
-
-    next();
-});
-
-// middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// serving build folder
-app.use(express.static(path.resolve(__dirname, "../web", "build")));
+// database connection ---------------------------------------------------------------------------------------
+mongoose
+    .connect(config.db.uri, config.db.config)
+    .then((res) => logging.info(NAMESPACE, 'Mongo connected'))
+    .catch((err) => logging.error(NAMESPACE, err.message, err));
 
-app.use(express.static("public"));
+// middlewares -----------------------------------------------------------------------------------------------
+app.use(serverUtils.logAllRequests);
 
-// ================================================================================
-// api imports
-const sampleRoute = require("./routes/sample");
-const { copyFile } = require("fs");
+// serving static file ---------------------------------------------------------------------------------------
+app.use(express.static(path.resolve(__dirname, '../web', 'build')));
 
-app.use("/api/sample", sampleRoute);
-// ================================================================================
+// api routing -----------------------------------------------------------------------------------------------
+app.use('/api', require('./routes/routes'));
 
-// error handling
-app.use((req, res) => {
-    const error = new Error("Path not found");
-    res.status(400).json({ message: error.message });
+// error handling --------------------------------------------------------------------------------------------
+app.use(serverUtils.errHandling);
+app.get('*', serverUtils.redirectToIndex);
+
+// start the server ------------------------------------------------------------------------------------------
+app.listen(config.server.port, () => {
+    logging.info(
+        NAMESPACE,
+        `Server running on ${config.server.hostname}:${config.server.port}`
+    );
 });
-
-// redirect to index
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../web", "build", "index.html"));
-});
-
-// mongodb connection
-
-// creating server
-const httpServer = http.createServer(app);
-httpServer.listen(config.server.port, () => {
-    logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`);
-});
-
-// app.listen(config.server.port, () => {
-//     logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`);
-// });

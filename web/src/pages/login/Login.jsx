@@ -1,18 +1,34 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import { Link as RouterLink, Redirect } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../../contexts/authContext";
+
+import {
+    Avatar,
+    Button,
+    // TextField,
+    FormControlLabel,
+    Checkbox,
+    Link,
+    Grid,
+    Box,
+    Typography,
+    Container,
+    CircularProgress, // change to MUI-FAB later
+} from "@material-ui/core";
+
+import TextField from "../../components/textfield/TextField";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Copyright from "../../components/copyright/Copyright";
+import { makeStyles } from "@material-ui/core/styles";
+
+/* 
+    Login page component
+
+    TODO:
+    - remember me checkbox not handled
+    - bad login not handled
+*/
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,43 +46,43 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(1, 0, 2),
     },
 }));
 
-async function loginUser(credentials) {
-    return fetch("http://localhost:8000/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-    }).then((response) => response.json());
-}
-
-export default function SignIn() {
+const SignIn = (props) => {
     const classes = useStyles();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
 
+    const [cred, setCred] = useState({ email: "", password: "" });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(""); // POST error
+
+    const { loggedIn, logIn } = useAuth();
+
+    // on input change
+    const handleChange = (e) => setCred({ ...cred, [e.target.name]: e.target.value });
+    // on form submit
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const token = await loginUser({
-                email,
-                password,
+        setLoading(true);
+        axios
+            .post("/api/auth/login", cred)
+            .then((res) => {
+                // ok set token
+                logIn(res.data.token);
+                setLoading(false);
+            })
+            .catch((e) => {
+                // display bad credentials or unexpected errors
+                setError(e.response.status === 401 ? "Invalid email/ password" : e.message);
+                setLoading(false);
             });
-            setToken(token);
-        } catch (e) {
-            alert(e.message);
-        }
-        console.log(token);
+
+        e.preventDefault(); // things works if this is on the bottom, interesting
     };
 
-    function validateForm() {
-        return email.length > 0 && password.length > 0;
-    }
+    /// redirect if logged in
+    const referer = (props) => (props.location.state === undefined ? "/" : props.location.state.referer);
+    if (loggedIn) return <Redirect to={referer(props)} />;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -74,62 +90,73 @@ export default function SignIn() {
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
+
                 <Typography component="h1" variant="h5">
                     Sign In
                 </Typography>
-                <form className={classes.form} onSubmit={handleSubmit} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        autoFocus
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        disabled={!validateForm()}
-                    >
-                        Sign In
-                    </Button>
+
+                {/* form */}
+                <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link component={RouterLink} to="/signUp" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
+                        <TextField
+                            name="email"
+                            label="Email Address"
+                            autoComplete="email"
+                            value={cred.email}
+                            onChange={handleChange}
+                            required
+                            autoFocus
+                        />
+                        <TextField
+                            name="password"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                            value={cred.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+
+                        {/* API message */}
+                        {error ? <Typography style={{ color: "red" }}>{error}</Typography> : <></>}
+
+                        {/* loading button (needs some styling or use MUI loading button) */}
+                        {loading ? (
+                            <CircularProgress />
+                        ) : (
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="secondary"
+                                className={classes.submit}
+                            >
+                                Sign In
+                            </Button>
+                        )}
+
+                        {/* links after submit */}
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link component={RouterLink} to="/signUp" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </form>
             </div>
             <Box mt={8}>
-                <Copyright />
+                <Copyright />{" "}
             </Box>
         </Container>
     );
-}
+};
+
+export default SignIn;
