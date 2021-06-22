@@ -9,8 +9,10 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Copyright from "../components/Copyright";
+import { FormHelperText } from "@material-ui/core";
+import Copyright from "../../components/copyright/Copyright";
 import { validateInput, checkIsFormValid } from '../../utils/formUtils';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,10 +45,21 @@ const initialState = {
 }
 
 export default function ForgetPassword() {
+
+  const [showError, setShowError] = useState(false);
+  const [formState, setFormState] = useState(initialState);
+
   const classes = useStyles();
 
-
-  const [formState, setFormState] = useState(initialState);
+  async function handleSendLink(url, payload) {
+    try {
+      const response = await axios.post(url, payload);
+      return response.json();
+    }
+    catch (error) {
+      console.log(error.message)
+    }
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -83,64 +96,96 @@ export default function ForgetPassword() {
     }));
   };
 
-  /* TODOs:
-  1. display successuflly sent the email 
-  */
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    // fake Url
-    let apiUrl = `http://api.com`;
-    console.log(apiUrl)
-    const payload = {
-      email: formState.email.value
-    };
-    console.log("current payload is ", payload);
+    let tempFormState = {};
+    let isFormValid = true;
+    const { value } = formState.email
+    const { hasError, error } = validateInput("email", value);
 
+    if (hasError) {
+      isFormValid = false;
+    }
+
+    tempFormState.email = {
+      value,
+      hasError,
+      error,
+      touched: true,
+    };
+
+
+    if (!isFormValid) {
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 5000);
+
+    } else {
+      const payload = {
+        email: formState.email.value,
+      };
+      // TODOS
+      // update fake Url with the server endpoint
+      // reset the formState to initialState
+      // update UI to inform enduser
+      const apiUrl = `http://api.com`;
+      console.log(apiUrl)
+      console.log("current payload is ", payload);
+      const response = handleSendLink(apiUrl, payload)
+      
+      console.log(response)
+    }
   }
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}></Avatar>
-        <Typography component="h1" variant="h5">
-          Forget password
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={handleChange}
-            onBlue={handleOnBlur}
-          />
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Send Link
-          </Button>
-          <Grid container>
-            <Link component={RouterLink} to="/" variant="body2">
-              {"Back to Sign In"}
-            </Link>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
-}
+return (
+  <Container component="main" maxWidth="xs">
+    <div className={classes.paper}>
+      <Avatar className={classes.avatar}></Avatar>
+      <Typography component="h1" variant="h5">
+        Forget password
+      </Typography>
+      {showError && <FormHelperText>please enter your email</FormHelperText>}
+      <form className={classes.form} noValidate>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          onChange={handleChange}
+          onBlue={handleOnBlur}
+          error={formState.email.touched && formState.email.hasError}
+          helperText={formState.email.error}
+        />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={handleSubmit}
+        >
+          Send Link
+        </Button>
+        <Grid container>
+          <Link component={RouterLink} to="/login" variant="body2">
+            {"Back to Sign In"}
+          </Link>
+        </Grid>
+      </form>
+    </div>
+    <Box mt={8}>
+      <Copyright />
+    </Box>
+  </Container>
+)
+};
+
 
