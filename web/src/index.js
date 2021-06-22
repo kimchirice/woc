@@ -10,14 +10,14 @@ import { ThemeProvider } from "@material-ui/core";
 import Theme from "./Theme";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <ThemeProvider theme={Theme}>
-            <CssBaseline />
-            <FortAwesomeIcons>
-                <AppWrapper />
-            </FortAwesomeIcons>
-        </ThemeProvider>
-    </React.StrictMode>,
+    // <React.StrictMode>
+    <ThemeProvider theme={Theme}>
+        <CssBaseline />
+        <FortAwesomeIcons>
+            <AppWrapper />
+        </FortAwesomeIcons>
+    </ThemeProvider>,
+    // </React.StrictMode>,
     document.getElementById("root")
 );
 

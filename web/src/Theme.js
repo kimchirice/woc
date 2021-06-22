@@ -9,7 +9,7 @@ const Theme = createMuiTheme({
         primary: { main: "#1d1d1d" },
         secondary: { main: "#895714" },
     },
-    spacing: 16,
+    spacing: 9,
     typography: {
         fontSize: 12,
     },

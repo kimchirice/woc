@@ -1,27 +1,27 @@
+import mentoringSvg from "./../../res/img/mentoring2.svg";
+import eventSvg from "../../res/img/events5.svg";
+import chatroomSvg from "../../res/img/chatrooms.svg";
+import onlinecourseSvg from "../../res/img/onlinecourses.svg";
+
 const cardData = [
-    {
-        icons: ["fas", "chalkboard-teacher"],
+    {   id: "1",
+        icon: mentoringSvg,
         title: "Mentoring",
-        desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.",
     },
     {
-        icons: ["fas", "desktop"],
+        id: "2",
+        icon: onlinecourseSvg,
         title: "Online courses",
-        desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.",
     },
     {
-        icons: ["fas", "book-reader"],
-        title: "Book club",
-        desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.",
+        id: "3",
+        icon: eventSvg,
+        title: "Events",
     },
     {
-        icons: ["fas", "comments"],
+        id: "4",
+        icon: chatroomSvg,
         title: "Chat rooms",
-        desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.",
     },
 ];
 
