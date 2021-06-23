@@ -52,10 +52,11 @@ function ResetPassword() {
   let { id } = useParams
   const classes = useStyles();
   let history = useHistory();
-  const apiUrl = "/api/auth/signup";
+  const apiUrl = "/api/resetpassword";
 
   const updatePassword = async (apiUrl, payload, config) => {
     try {
+      // TOODS update post req once the endpoint is ready
       const response = await axios.post(apiUrl, payload, config)
       return response.data
     }
@@ -137,7 +138,7 @@ function ResetPassword() {
       const payload = {
         password: formState.password.value,
       };
-      
+
       const config = {
         
       }
