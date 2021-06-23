@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { FormHelperText } from "@material-ui/core";
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Copyright from "../../components/copyright/Copyright";
 import { validateInput, checkIsFormValid } from '../../utils/formUtils';
 import axios from "axios";
@@ -142,7 +143,9 @@ export default function ForgetPassword() {
 return (
   <Container component="main" maxWidth="xs">
     <div className={classes.paper}>
-      <Avatar className={classes.avatar}></Avatar>
+      <Avatar className={classes.avatar}>
+        <LockOpenIcon />
+      </Avatar>
       <Typography component="h1" variant="h5">
         Forget password
       </Typography>
@@ -159,7 +162,7 @@ return (
           autoComplete="email"
           autoFocus
           onChange={handleChange}
-          onBlue={handleOnBlur}
+          onBlur={handleOnBlur}
           error={formState.email.touched && formState.email.hasError}
           helperText={formState.email.error}
         />
