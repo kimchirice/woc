@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { checkIsFormValid, validateInput } from "../../utils/formUtils";
-import { Link as RouterLink, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -49,14 +48,16 @@ function ResetPassword() {
   const [formState, setFormState] = useState(initialState);
   const [showError, setShowError] = useState(false);
 
-  let { id } = useParams
+  let { id } = useParams();
+  console.log(id);
+
   const classes = useStyles();
   let history = useHistory();
   const apiUrl = "/api/resetpassword";
 
   const updatePassword = async (apiUrl, payload, config) => {
     try {
-      // TOODS update post req once the endpoint is ready
+      // TODOS update post req once the endpoint is ready
       const response = await axios.post(apiUrl, payload, config)
       return response.data
     }
@@ -169,7 +170,6 @@ function ResetPassword() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
                 name="email"
                 id="email"
